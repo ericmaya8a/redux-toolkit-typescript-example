@@ -1,0 +1,1 @@
+export const fetchRandomUsers = async () => await(await fetch('https://randomuser.me/api/?results=10&inc=name,gender,email,phone,picture,nat')).json()

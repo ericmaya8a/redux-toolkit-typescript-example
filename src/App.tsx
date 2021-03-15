@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useCallback, FC } from 'react'
+import styled from 'styled-components'
+import { useAppDispatch } from './hooks'
+import { fetchRandomUsers } from './hooks/utils'
+import { setUsers } from './reducers/users'
+import { Users } from './components/Users'
+import { CurrentUser } from './components/CurrentUser'
 
-function App() {
+export const App: FC = () => {
+  const dispatch = useAppDispatch()
+
+  const fetchUsers = useCallback(
+    async () => {
+      const { results } = await fetchRandomUsers()
+      dispatch(setUsers(results))
+    },
+    [dispatch],
+  )
+
+  useEffect(() => {
+    fetchUsers()
+  }, [fetchUsers])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <h1 style={{textAlign: 'center'}}>Random Users</h1>
+      <Container>
+        <Users />
+        <main>
+          <CurrentUser />
+        </main>
+      </Container>
+    </>
+  )
 }
 
-export default App;
+const Container = styled.div`
+  margin: 2rem auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 25% auto;
+  grid-gap: 1rem;
+  border: 1px solid #83ba43;
+  border-radius: 4px;
+  padding: 1rem;
+
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
