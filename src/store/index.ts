@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { usersReducer } from '../reducers/users'
-import { currentUserReducer } from '../reducers/currentUser'
+import { userListReducer } from '../reducers/userList'
+import { selectedUserReducer } from '../reducers/selectedUser'
 
 export const store = configureStore({
   reducer: {
-    users: usersReducer,
-    currentUser: currentUserReducer,
+    userList: userListReducer,
+    selectedUser: selectedUserReducer,
   }
 })
 
