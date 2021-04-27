@@ -1,4 +1,4 @@
-const URL = 'https://tinyfac.es/api/users'
+const URL = "https://tinyfac.es/api/users";
 interface User {
   id: number;
   firstName: string;
@@ -25,14 +25,16 @@ interface FetchProps {
 }
 
 export const fetchUsers = async (): Promise<User[]> => {
-  const users: FetchProps[] = await(await fetch(URL)).json()
+  const users: FetchProps[] = await (await fetch(URL)).json();
   return users
-  .sort((x, y) => x.first_name === y.first_name ? 0 : x.first_name > y.first_name ? 1 : -1)
-  .map((user) => ({
-    id: user.avatars_origin.id,
-    firstName: user.first_name,
-    lastName: user.last_name,
-    gender: user.gender,
-    avatar: user.avatars[1].url
-  }))
-}
+    .sort((x, y) =>
+      x.first_name === y.first_name ? 0 : x.first_name > y.first_name ? 1 : -1
+    )
+    .map((user) => ({
+      id: user.avatars_origin.id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      gender: user.gender,
+      avatar: user.avatars[1].url,
+    }));
+};

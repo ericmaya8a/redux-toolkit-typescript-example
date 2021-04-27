@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { User } from './userList'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "./userList";
 
 interface State {
   data: User | null;
@@ -7,20 +7,20 @@ interface State {
 
 const initialState: State = {
   data: null,
-}
+};
 
 export const selectedUserSlice = createSlice({
-  name: 'selectedUser',
+  name: "selectedUser",
   initialState,
   reducers: {
     getSelectedUser: (state, action: PayloadAction<User>) => {
-      state.data = action.payload
+      state.data = action.payload;
     },
     clearSelectedUser: (state) => {
-      state.data = null
-    }
-  }
-})
-export const { getSelectedUser, clearSelectedUser } = selectedUserSlice.actions
+      state.data = null;
+    },
+  },
+});
+export const { getSelectedUser, clearSelectedUser } = selectedUserSlice.actions;
 
-export const selectedUserReducer = selectedUserSlice.reducer
+export const selectedUserReducer = selectedUserSlice.reducer;
